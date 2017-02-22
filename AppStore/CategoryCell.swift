@@ -13,6 +13,14 @@ class CategoryCell: UICollectionViewCell {
     
     fileprivate let cellID = "cellID"
     
+    var appCategory: AppCategory? {
+        didSet {
+            if let name = appCategory?.name  {
+                titleLabel.text = name
+            }
+        }
+    }
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Fetaured apps"
@@ -81,11 +89,17 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AppCell
+        if let app = appCategory?.apps?[indexPath.row] {
+            cell.app = app
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        if let count = appCategory?.apps?.count {
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

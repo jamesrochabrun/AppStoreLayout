@@ -10,6 +10,19 @@ import UIKit
 
 class AppCell: UICollectionViewCell {
     
+    var app: App? {
+        didSet {
+            if let name = app?.name, let category = app?.category, let price = app?.price, let imageName = app?.imageName {
+                nameLabel.text = name
+                categoryLabel.text = category
+                priceLabel.text = "$\(price)"
+                appImageview.image = UIImage(named: imageName)
+            } else {
+                priceLabel.text = ""
+            }
+        }
+    }
+    
     let appImageview: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +30,6 @@ class AppCell: UICollectionViewCell {
         iv.layer.cornerRadius = 16
         iv.layer.masksToBounds = true
         iv.contentMode = .scaleAspectFill
-        iv.image = #imageLiteral(resourceName: "tipIcon")
         return iv
     }()
     
