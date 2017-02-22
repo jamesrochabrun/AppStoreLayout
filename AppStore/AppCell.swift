@@ -10,15 +10,31 @@ import UIKit
 
 class AppCell: UICollectionViewCell {
     
+    var nameLabelheightAnchor: NSLayoutConstraint?
+    
     var app: App? {
         didSet {
-            if let name = app?.name, let category = app?.category, let price = app?.price, let imageName = app?.imageName {
+            priceLabel.text = ""
+            nameLabel.text = ""
+            categoryLabel.text = ""
+            
+            if let name = app?.name {
                 nameLabel.text = name
+                let rect = NSString(string: name).boundingRect(with:  CGSize(width: frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSFontAttributeName:  Constants.UI.h2FontSize], context: nil)
+                if rect.height > Constants.UI.nameLabelHeight {
+                    nameLabelheightAnchor?.isActive = false
+                    nameLabelheightAnchor = nameLabel.heightAnchor.constraint(equalToConstant: Constants.UI.nameLabelHeight * 2)
+                    nameLabelheightAnchor?.isActive = true
+                }
+            }
+            if let category = app?.category {
                 categoryLabel.text = category
+            }
+            if let price = app?.price {
                 priceLabel.text = "$\(price)"
+            }
+            if let imageName = app?.imageName {
                 appImageview.image = UIImage(named: imageName)
-            } else {
-                priceLabel.text = ""
             }
         }
     }
@@ -35,9 +51,8 @@ class AppCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "tipaapp"
         label.font = Constants.UI.h2FontSize
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Constants.UI.h1Color
         return label
@@ -45,7 +60,6 @@ class AppCell: UICollectionViewCell {
     
     let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "Entertainment"
         label.font = Constants.UI.h3FontSize
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +69,6 @@ class AppCell: UICollectionViewCell {
     
     let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "0.99 USD$"
         label.font = Constants.UI.h3FontSize
         label.numberOfLines = 2
         label.textColor = Constants.UI.h2Color
@@ -81,7 +94,8 @@ class AppCell: UICollectionViewCell {
         
         nameLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         nameLabel.topAnchor.constraint(equalTo: appImageview.bottomAnchor, constant: 2).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: Constants.UI.nameLabelHeight).isActive = true
+        nameLabelheightAnchor = nameLabel.heightAnchor.constraint(equalToConstant: Constants.UI.nameLabelHeight)
+        nameLabelheightAnchor?.isActive = true
         
         categoryLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         categoryLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2).isActive = true

@@ -14,7 +14,11 @@ class AppCategory: NSObject {
     var name: String?
     var apps: [App]?
     
-     static func fetchFeaturedApps() {
+    override func setValue(_ value: Any?, forKey key: String) {
+        
+    }
+    
+    static func fetchFeaturedApps(completion: @escaping ([AppCategory]) -> ()) {
         
         let urlString = "https://api.letsbuildthatapp.com/appstore/featured"
         guard let url = URL(string: urlString) else {
@@ -28,53 +32,39 @@ class AppCategory: NSObject {
             }
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                if let dictionary = json as? [String: AnyObject], let categoriesArray = dictionary["categories"] as? [Dictionary] {
+                if let dictionary = json as? [String: AnyObject], let categoriesArray = dictionary["categories"] as? [[String: AnyObject]] {
                     
-///START FROM HERE
+                    var appCategories = [AppCategory]()
+                    for dict in categoriesArray {
+                        let appCategory =  AppCategory.setAppCategoryFrom(dictionary: dict)
+                        appCategories.append(appCategory)
+                    }
                     
-                    
+                    DispatchQueue.main.async {
+                        completion(appCategories)
+                    }
                 }
             } catch let error {
                 print("SERIALIZATION ERROR:" , error)
             }
-        }.resume()
+            }.resume()
     }
     
+    static func setAppCategoryFrom(dictionary: [String: AnyObject]) -> AppCategory {
     
-    static func sampleAppsCategories() -> [AppCategory] {
-        
-        let bestNewAppsCategory = AppCategory()
-        bestNewAppsCategory.name = "Best new Apps"
-        var bestNewApps = [App]()
-        
-        let tinderApp = App()
-        tinderApp.name = "tinder"
-        tinderApp.imageName = "tipIcon"
-        tinderApp.category = "Entertainment"
-        tinderApp.price = NSNumber(floatLiteral: 2.99)
-        
-        bestNewApps.append(tinderApp)
-        bestNewAppsCategory.apps = bestNewApps
-        
-        let bestNewGamesCategory = AppCategory()
-        bestNewGamesCategory.name = "Best new Games"
-        var bestNewGameApps = [App]()
-        
-        let instagram = App()
-        instagram.name = "instagram"
-        instagram.imageName = "tipIcon"
-        instagram.category = "Entertainment"
-        instagram.price = NSNumber(floatLiteral: 2.99)
-        
-        bestNewGameApps.append(instagram)
-        bestNewGamesCategory.apps = bestNewGameApps
-        
-        
-        return [bestNewAppsCategory, bestNewGamesCategory]
-        
+        let appCategory = AppCategory()
+        appCategory.name = dictionary["name"] as? String
+        if let appsDictArray = dictionary["apps"] as? [[String: AnyObject]] {
+            appCategory.apps = [App]()
+            for dict in appsDictArray {
+                let app = App.setAppFrom(dictionary: dict)
+                appCategory.apps?.append(app)
+                print(app.name)
+            }
+        }
+        return appCategory
     }
     
-    
-    
+        
     
 }

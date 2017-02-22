@@ -15,4 +15,18 @@ class App: NSObject {
     var category: String?
     var imageName: String?
     var price: NSNumber?
+    
+    
+    static func setAppFrom(dictionary: [String: AnyObject]) -> App {
+        
+        let app = App()
+        app.name = dictionary["Name"] as? String
+        app.category = dictionary["Category"] as? String
+        app.imageName = dictionary["ImageName"] as? String
+        app.price = dictionary["Price"] as? NSNumber
+        app.id = dictionary["Id"] as? NSNumber
+        return app
+    }
+
 }
+
