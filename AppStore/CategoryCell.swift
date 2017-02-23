@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
-class CategoryCell: UICollectionViewCell {
+protocol CategoryCellDelegate: class {
+    func showDetailOf(app: App)
+}
+
+//this is the one vertical
+class CategoryCell: BaseCell {
     
     fileprivate let cellID = "cellID"
+    weak var delegate: CategoryCellDelegate?
     
     var appCategory: AppCategory? {
         didSet {
@@ -54,12 +60,7 @@ class CategoryCell: UICollectionViewCell {
         return  view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    func setupViews() {
+    override func setupViews() {
         addSubview(appsCollectionView)
         addSubview(titleLabel)
         addSubview(dividerLineView)
@@ -80,14 +81,9 @@ class CategoryCell: UICollectionViewCell {
         dividerLineView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
     
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AppCell
@@ -106,6 +102,12 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: Constants.UI.appCellWidth, height: frame.height - Constants.UI.titleLabelHeight - Constants.UI.dividerLineHeight * 2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let app = appCategory?.apps?[indexPath.row] {
+            delegate?.showDetailOf(app: app)
+        }
     }
 }
 

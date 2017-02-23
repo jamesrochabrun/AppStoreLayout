@@ -8,7 +8,9 @@
 
 import UIKit
 
-class AppCell: UICollectionViewCell {
+
+
+class AppCell: BaseCell {
     
     var nameLabelheightAnchor: NSLayoutConstraint?
     
@@ -42,7 +44,6 @@ class AppCell: UICollectionViewCell {
     let appImageview: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.backgroundColor = .red
         iv.layer.cornerRadius = 16
         iv.layer.masksToBounds = true
         iv.contentMode = .scaleAspectFill
@@ -76,12 +77,7 @@ class AppCell: UICollectionViewCell {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    func setupViews() {
+    override func setupViews() {
         
         addSubview(appImageview)
         addSubview(nameLabel)
@@ -108,8 +104,5 @@ class AppCell: UICollectionViewCell {
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 

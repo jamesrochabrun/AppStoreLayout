@@ -43,7 +43,7 @@ class Header: CategoryCell {
             addSubview(appImageview)
             appImageview.layer.cornerRadius = 0
             appImageview.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
-            appImageview.layer.borderWidth = 0.5
+            appImageview.layer.borderWidth = 0.5 
             appImageview.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
             appImageview.topAnchor.constraint(equalTo: topAnchor).isActive = true
             appImageview.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

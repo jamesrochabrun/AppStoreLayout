@@ -35,12 +35,13 @@ class FeaturedAppsController: UICollectionViewController {
         if indexPath.item == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: largeCellID, for: indexPath) as! LargeCategoryCell
             cell.appCategory = appCategories?[indexPath.row]
+            cell.delegate = self
             return cell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! CategoryCell
         cell.appCategory = appCategories?[indexPath.row]
-        cell.backgroundColor = .blue
+        cell.delegate = self
         return cell
         
     }
@@ -58,6 +59,8 @@ class FeaturedAppsController: UICollectionViewController {
         header.appCategory = featuredApps?.bannerCategory
         return header
     }
+    
+
 }
 
 extension FeaturedAppsController: UICollectionViewDelegateFlowLayout {
@@ -73,6 +76,16 @@ extension FeaturedAppsController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: Constants.UI.headerHeight)
+    }
+}
+
+extension FeaturedAppsController: CategoryCellDelegate {
+    
+    func showDetailOf(app: App) {
+        let layout = UICollectionViewFlowLayout()
+        let appDetailController = DetailViewController(collectionViewLayout: layout)
+        appDetailController.app = app
+        navigationController?.pushViewController(appDetailController, animated: true)
     }
 }
 
