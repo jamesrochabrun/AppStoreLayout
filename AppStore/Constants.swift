@@ -19,6 +19,11 @@ struct Constants {
         static let padding: CGFloat = 14
         static let priceLabelHeight: CGFloat = 20
         static let appCellWidth: CGFloat = 100
+        static let largeAppCellWidth: CGFloat = 200
+        static let appCellHeight: CGFloat = 230
+        static let largeAppCellHeight: CGFloat = 160
+        static let headerHeight: CGFloat = 125
+        static let headerCellwidth = (UIApplication.shared.keyWindow?.frame.width)! / 2 + 50
         static let h1Color: UIColor = UIColor.darkGray
         static let h2Color: UIColor = UIColor.lightGray
         static let h1FontSize: UIFont = UIFont.systemFont(ofSize: 18)

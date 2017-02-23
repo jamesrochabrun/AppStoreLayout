@@ -18,12 +18,14 @@ class CategoryCell: UICollectionViewCell {
             if let name = appCategory?.name  {
                 titleLabel.text = name
             }
+            DispatchQueue.main.async {
+                self.appsCollectionView.reloadData()
+            }
         }
     }
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Fetaured apps"
         label.font = Constants.UI.h1FontSize
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Constants.UI.h1Color
@@ -54,13 +56,13 @@ class CategoryCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(titleLabel)
-        addSubview(appsCollectionView)
-        addSubview(dividerLineView)
         setupViews()
     }
     
     func setupViews() {
+        addSubview(appsCollectionView)
+        addSubview(titleLabel)
+        addSubview(dividerLineView)
         
         titleLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: Constants.UI.titleLabelHeight).isActive = true

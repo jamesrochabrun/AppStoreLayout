@@ -78,14 +78,15 @@ class AppCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(appImageview)
-        addSubview(nameLabel)
-        addSubview(categoryLabel)
-        addSubview(priceLabel)
         setupViews()
     }
     
     func setupViews() {
+        
+        addSubview(appImageview)
+        addSubview(nameLabel)
+        addSubview(categoryLabel)
+        addSubview(priceLabel)
         
         appImageview.topAnchor.constraint(equalTo: topAnchor).isActive = true
         appImageview.heightAnchor.constraint(equalToConstant: frame.width).isActive = true
