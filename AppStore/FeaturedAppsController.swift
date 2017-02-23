@@ -18,8 +18,8 @@ class FeaturedAppsController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        AppCategory.fetchFeaturedApps { (featuredApps) in
+
+        ServiceAPI.sharedInstance.fetchFeaturedApps { (featuredApps) in
             self.featuredApps = featuredApps
             self.appCategories = featuredApps.appCategories
             self.collectionView?.reloadData()

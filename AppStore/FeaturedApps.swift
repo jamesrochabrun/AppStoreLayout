@@ -21,12 +21,13 @@ class FeaturedApps: NSObject {
             featuredApps.bannerCategory = AppCategory.setAppCategoryFrom(dictionary: bannerCategoryDictionary)
         }
         if let categoriesArray = dictionary["categories"] as? [[String: AnyObject]] {
-            var appCategories = [AppCategory]()
-            for dict in categoriesArray {
-                let appCategory = AppCategory.setAppCategoryFrom(dictionary: dict)
-                appCategories.append(appCategory)
-            }
-            featuredApps.appCategories = appCategories
+//            var appCategories = [AppCategory]()
+//            for dict in categoriesArray {
+//                let appCategory = AppCategory.setAppCategoryFrom(dictionary: dict)
+//                appCategories.append(appCategory)
+//            }
+//            featuredApps.appCategories = appCategories
+            featuredApps.appCategories = categoriesArray.map{AppCategory.setAppCategoryFrom(dictionary: $0)}
         }
         return featuredApps
     }

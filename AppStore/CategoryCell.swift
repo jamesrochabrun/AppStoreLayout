@@ -44,7 +44,6 @@ class CategoryCell: BaseCell {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.showsHorizontalScrollIndicator = false
         cv.dataSource = self
         cv.delegate = self
         cv.alwaysBounceHorizontal = true

@@ -24,6 +24,7 @@ struct Constants {
         static let largeAppCellHeight: CGFloat = 160
         static let headerHeight: CGFloat = 125
         static let headerCellwidth = (UIApplication.shared.keyWindow?.frame.width)! / 2 + 50
+        static let screenshotCellHeight: CGFloat = 200
         static let appDetailHeaderHeight: CGFloat = 170
         static let h1Color: UIColor = UIColor.darkGray
         static let h2Color: UIColor = UIColor.lightGray
@@ -31,6 +32,8 @@ struct Constants {
         static let h2FontSize: UIFont = UIFont.systemFont(ofSize: 16)
         static let h3FontSize: UIFont = UIFont.systemFont(ofSize: 14)
         static let defaultBlueColor: UIColor = UIColor(red: 0, green: 199/255, blue: 250/255, alpha: 1)
+        static let vPaddingDescTv: CGFloat = 4
+        static let hPaddingDescTv: CGFloat = 8
     }
     
 }
