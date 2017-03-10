@@ -15,9 +15,7 @@ class LargeCategoryCell: CategoryCell {
     
     override func setupViews() {
         super.setupViews()
-        addSubview(appsCollectionView)
         appsCollectionView.register(LargeAppCell.self, forCellWithReuseIdentifier: cellID)
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -88,7 +88,8 @@ extension ScreenshotCell: UICollectionViewDataSource, UICollectionViewDelegate, 
             let iv = UIImageView()
             iv.translatesAutoresizingMaskIntoConstraints = false
             iv.contentMode = .scaleAspectFill
-            iv.backgroundColor = .orange
+            iv.backgroundColor = .clear
+            iv.clipsToBounds = true
             return iv
         }()
         

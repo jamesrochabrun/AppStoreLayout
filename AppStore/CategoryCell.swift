@@ -60,6 +60,7 @@ class CategoryCell: BaseCell {
     }()
     
     override func setupViews() {
+        //backgroundColor = .red
         addSubview(appsCollectionView)
         addSubview(titleLabel)
         addSubview(dividerLineView)

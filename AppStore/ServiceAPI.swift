@@ -40,6 +40,8 @@ struct ServiceAPI {
     func fetchAppDetailInformation(withAppID appID: NSNumber, completion: @escaping (App) -> ()) {
         
         if let urlString = URL(string: "http://www.statsallday.com/appstore/appdetail?id=\(appID)") {
+            
+            print(urlString)
         URLSession.shared.dataTask(with: urlString, completionHandler: { (data, response, error) in
             if error != nil {
                 print("ERROR LOADING APP DETAILS")

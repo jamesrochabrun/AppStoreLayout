@@ -78,6 +78,7 @@ class AppCell: BaseCell {
     }()
     
     override func setupViews() {
+        //backgroundColor = .yellow
         
         addSubview(appImageview)
         addSubview(nameLabel)

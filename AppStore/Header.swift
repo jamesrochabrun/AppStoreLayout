@@ -33,7 +33,7 @@ class Header: CategoryCell {
         if let app = appCategory?.apps?[indexPath.row] {
             cell.app = app
         }
-        cell.appImageview.backgroundColor = .yellow
+       // cell.appImageview.backgroundColor = .yellow
         return cell
     }
     

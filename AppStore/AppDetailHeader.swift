@@ -27,7 +27,7 @@ class AppDetailHeader: BaseCell {
     let appImageview: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.backgroundColor = .red
+        //iv.backgroundColor = .red
         iv.layer.cornerRadius = 16
         iv.layer.masksToBounds = true
         iv.contentMode = .scaleAspectFill

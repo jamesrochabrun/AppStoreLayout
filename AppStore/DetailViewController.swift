@@ -34,6 +34,7 @@ class DetailViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view.backgroundColor = .red
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(AppDetailHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)

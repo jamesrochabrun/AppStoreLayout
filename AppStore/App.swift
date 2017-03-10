@@ -19,6 +19,7 @@ class App: NSObject {
     var desc: String?
     var appInformation: AnyObject?
     
+    
     static func setAppFrom(dictionary: [String: AnyObject]) -> App {
         
         let app = App()
@@ -34,4 +35,3 @@ class App: NSObject {
     }
 
 }
-
